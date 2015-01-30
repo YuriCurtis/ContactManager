@@ -20,8 +20,8 @@
         <li ng-repeat="contact in contacts | filter:query | orderBy:orderProp">
 			<a>
 				<img ng-src="img/{{employee.img}}">
-				<h4>{{employee.firstName}} {{employee.lastName}}</h4>
-				<h5 class="small">{{employee.title}}</h5>
+				<h4>{{contact.firstName}} {{contact.lastName}}</h4>
+				<h5 class="small">{{contact.title}}</h5>
 			</a>
         </li>
     </ul>
