@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/styles.css" rel="stylesheet">
 <script src="lib/angular.js"></script>
 <script src="lib/angular-route.js"></script>
@@ -14,8 +15,17 @@
 <div>
 <h1>TITLE</h1>
 </div>
-<div class="container">
-<!-- Body Content -->
+<div class="container scroller" style="top:138px;">
+    <ul class="list-inline">
+        <li ng-repeat="contact in contacts | filter:query | orderBy:orderProp">
+			<a>
+				<img ng-src="img/{{employee.img}}">
+				<h4>{{employee.firstName}} {{employee.lastName}}</h4>
+				<h5 class="small">{{employee.title}}</h5>
+			</a>
+        </li>
+    </ul>
+</div>
 </div>
 </body>
 </html>
