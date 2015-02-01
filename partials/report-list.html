@@ -1,0 +1,23 @@
+<div class="spec-navigation-bar">
+    <div class="spec-navigation-bar__item left quarter">
+        <a class="icon-button--quiet back-button" href="" ng-click="back()">
+            <span class="spec-icon icon--back"></span>
+        </a>
+    </div>
+    <div class="spec-navigation-bar__item center half">
+        <h1 class="spec-navigation-bar__title">Direct Reports</h1>
+    </div>
+</div>
+
+<div class="spec-list__container scroller" style="top:69px;">
+    <ul class="spec-list list">
+        <li ng-repeat="contact in contacts | filter:query | orderBy:orderProp" class="list__item">
+            <a ng-click="go('/contacts/' + contact.id)">
+                <img ng-src="pics/{{contact.pic}}">
+                <p>{{contact.firstName}} {{contact.lastName}}</p>
+                <p>{{contact.title}}</p>
+                <span class="chevron"></span><span class="count">{{contact.reports}}</span>
+            </a>
+        </li>
+    </ul>
+</div>

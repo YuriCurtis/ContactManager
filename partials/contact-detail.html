@@ -1,0 +1,53 @@
+<div class="spec-navigation-bar">
+    <div class="spec-navigation-bar__item left quarter">
+        <a class="spec-icon-button--quiet back-button" href="" ng-click="goBack()">
+            <span class="spec-icon icon--back"></span>
+        </a>
+    </div>
+    <div class="spec-navigation-bar__item center half">
+        <img src="img/logo.headspring.png" class="logo" /><h1 class="spec-navigation-bar__title">EMPLOYEE DIRECTORY</h1>
+    </div>
+</div>
+
+<div class='details'>
+	
+<img ng-src="img/{{contact.img}}" class="contact-image">
+<div class="contact-image_bg">
+    <h1><strong><a href="#" editable-text="contact.firstName" id="firstName">{{contact.firstName || 'empty' }}</a>
+	<a href="#" editable-text="contact.lastName" id="lastName">{{contact.lastName || 'empty' }}</a></strong></h1>
+    <h2><a href="#" editable-text="contact.title" id="title">{{contact.title || 'empty' }}</a></h2>
+    <h2><a href="#" editable-text="contact.city" id="city">{{contact.city || 'empty' }}</a></h2>
+</div>
+    <div class="spec-list__container">
+        <ul class="spec-list list actions">
+            <li class="spec-list__item" ng-show="contact.managerId">
+			<p>View Manager</p><a ng-click="go('contacts/' + contact.managerId)" editable-text="contact.managerName" id="managerName">
+			<p>{{contact.managerName || 'empty' }}</p><div class="action-icon icon-manager"/></a>
+			</li>
+            <li class="spec-list__item" ng-show="contact.reports">
+			<p>View Direct Reports</p><a ng-click="go('contacts/' + contact.id + '/reports')" editable-text="contact.reports" id="reports">
+			<p>{{contact.reports}}</p><div class="action-icon icon-reports"/></a>
+			</li>
+            <li class="spec-list__item" ng-show="contact.officePhone">
+			<p>Call Office</p><a href="tel:{{contact.officePhone}}" editable-text="contact.officePhone"  id="officePhone">
+			<p>{{contact.officePhone || 'empty' }}</p><div class="action-icon icon-call"/></a>
+			</li>
+            <li class="spec-list__item" ng-show="contact.cellPhone">
+			<p>Call Cell</p><a href="tel:{{contact.cellPhone}}" editable-text="contact.cellPhone"  id="cellPhone">
+			<p>{{contact.cellPhone || 'empty' }}</p><div class="action-icon icon-call"/></a>
+			</li>
+            <li class="spec-list__item" ng-show="contact.cellPhone">
+			<p>SMS</p><a href="sms:{{contact.cellPhone}}" editable-text="contact.cellPhone" >
+			<p>{{contact.cellPhone || 'empty' }}</p><div class="action-icon icon-sms"/></a>
+			</li>
+            <li class="spec-list__item" ng-show="contact.email">
+			<p>Email</p><a href="mailto:{{contact.email}}" editable-text="contact.email"  id="email">
+			<p>{{contact.email || 'empty' }}</p><div class="action-icon icon-mail"/></a>
+			</li>
+        </ul>
+    </div>
+	<!--<button class="btn btn-success" ng-click="go('contacts/' + contact.id + '/edit')">
+		<span class="glyphicon glyphicon-user"></span>  Edit User
+	</button>-->
+</div>
+                
