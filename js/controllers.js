@@ -1,7 +1,11 @@
 'use strict';
 
-angular.module('contactsApp.controllers', [])
-    .controller('AppCtrl', ['$scope', '$rootScope', '$window', '$location', function ($scope, $rootScope, $window, $location) {
+var app = angular.module('contactsApp.controllers', [])
+
+    app.controller('AppCtrl', ['$scope', '$rootScope', '$window', '$location', 'Contact', 
+	function ($scope, $rootScope, $window, $location, Contact) {
+		    
+		// Animation
         $scope.slide = '';
         $rootScope.back = function() {
           $scope.slide = 'slide-right';
@@ -13,70 +17,46 @@ angular.module('contactsApp.controllers', [])
         }
     }])
 	
-	// Contact Load Controller
-    .controller('contactListCtrl', ['$scope', 'contact', function ($scope, contact) {
-        $scope.contacts = contact.query();
+// Contact Load Controller
+    app.controller('contactListCtrl', ['$scope', 'Contact', function ($scope, Contact) {
+        // callback for ng-click 'createUser':
+        $scope.addContact = function () {
+            $location.path('/contact-add');
+        };
+		//query() returns all the contacts
+		$scope.contacts = Contact.query(); 
     }])
 	
-	// Contact Details Controller
-    .controller('contactDetailCtrl', ['$scope', '$routeParams', 'contact', function ($scope, $routeParams, contact) {
-        $scope.contact = contact.get({contactId: $routeParams.contactId});
-    }])
+// Contact Details Controller
+    app.controller('contactDetailCtrl', ['$scope', '$routeParams', 'Contact', function ($scope, $routeParams, Contact) {
+		// get() returns a single entry
+        $scope.contact = Contact.get({contactId: $routeParams.contactId});
+		// callback for ng-click 'delContact':
+        $scope.delContact = function (contactId) {
+            Contact.delete({ id: contactId });
+            $scope.contact = Contact.query();
+        };
+  
+    }]) 
 	
-	// Contact Add Controller
-    .controller('contactAddCtrl', ['$scope', '$routeParams', 'contact', function ($scope, $routeParams, contact) {
-    // Start as not visible but when button is tapped it will show as true
-		
-	$scope.addUser = function(id) {
-			if (id == 'new') {
-					$scope.visible = true;
-				} else {
-					$scope.visible = false;
-				}
-			// Create the array to hold the list of New Contacts
+// Contact Add Controller
+    app.controller('contactAddCtrl', ['$scope', '$routeParams', 'Contact', function ($scope, $routeParams, Contact) {
+		// callback for ng-click 'createUser':
+        $scope.addContact = function() { //create a new contact
+		// Start as not visible but when button is tapped it will show as true 
+        $scope.visible = false;  		
+			$scope.contact.$save(function() {
+				Contact.create($scope.contact);
+				$window.location.href = ''; //redirect to home
+				/*$location.path('/contact-add');*/
+			});
 			
-				$scope.contacts = [];
-				/*$scope.contacts = contact.query();*/
-			
-			// Create the function to push the data into the "contacts" array
-				$scope.newContact = function(){
-					$scope.contacts.push({
-				 firstName:$scope.contactfirstName,
-				  lastName:$scope.contactlastName,
-					 email:$scope.contactemail,
-					  date:$scope.contactdate,
-					 title:$scope.contacttitle,
-				department:$scope.contactdepartment,
-			   managerName:$scope.contactmanagerName,
-				   reports:$scope.contactreports,
-			   officePhone:$scope.contactofficePhone,
-				 cellPhone:$scope.contactcellPhone,
-					  city:$scope.contactcity,
-				   twitter:$scope.contacttwitterId,
-					  blog:$scope.contactblog
-					});
-			
-					$scope.contactfirstName = '';
-					$scope.contactlastName = '';
-					$scope.contactemail = '';
-					$scope.contactdate = '';
-					$scope.contactofficePhone = '';
-					$scope.contactcellPhone = '';
-					$scope.contacttitle = '';
-					$scope.contactdepartment = '';
-					$scope.contactmanagerName = '';
-					$scope.contactreports = '';
-					$scope.contactcity = '';
-					$scope.contacttwitterId = '';
-					$scope.contactblog = '';
-					};
-				};
-
+		};
     }])
-	// Contact Edit Controller
-    .controller('contactEditCtrl', ['$scope', '$routeParams', 'contact', function ($scope, $routeParams, contact) {
+// Contact Edit Controller - Try to use xeditable for inline editing instead
+    app.controller('contactEditCtrl', ['$scope', '$routeParams', 'contact', function ($scope, $routeParams, contact) {
     // GET contacts current data
-		$scope.contact = contact.get({contactId: $routeParams.contactId});
+		$scope.contact = Contact.get({contactId: $routeParams.contactId});
 		
 	// Start as not visible but when button is tapped it will show as true 
         $scope.visible = false;
@@ -87,91 +67,35 @@ angular.module('contactsApp.controllers', [])
     // Create the function to grab form data for the updated entry
     	$scope.editContact = function(){
 
-        $scope.contacts.$save({
-     firstName:$scope.contactfirstName,
-      lastName:$scope.contactlastName,
-         email:$scope.contactemail,
-          date:$scope.contactdate,
-         title:$scope.contacttitle,
-    department:$scope.contactdepartment,
-   managerName:$scope.contactmanagerName,
-       reports:$scope.contactreports,
-   officePhone:$scope.contactofficePhone,
-     cellPhone:$scope.contactcellPhone,
-          city:$scope.contactcity,
-       twitter:$scope.contacttwitterId,
-          blog:$scope.contactblog
-        });
-
-        $scope.contactfirstName = '';
-        $scope.contactlastName = '';
-        $scope.contactemail = '';
-        $scope.contactdate = '';
-        $scope.contactofficePhone = '';
-        $scope.contactcellPhone = '';
-        $scope.contacttitle = '';
-        $scope.contactdepartment = '';
-        $scope.contactmanagerName = '';
-        $scope.contactreports = '';
-        $scope.contactcity = '';
-        $scope.contacttwitterId = '';
-        $scope.contactblog = '';
-
-    };
-	
-	/*$scope.editContact.$save();*/
+    	};
 	
     }])
 	
-	// Manager Report List Controller
-    .controller('ReportListCtrl', ['$scope', '$routeParams', 'Report', function ($scope, $routeParams, Report) {
+// Manager Report List Controller
+    app.controller('ReportListCtrl', ['$scope', '$routeParams', 'Report', 
+	function ($scope, $routeParams, Report) {
         $scope.contacts = Report.query({contactId: $routeParams.contactId});
-    }]);
+    }])
+// Authentication - needs to be implemented
+	app.controller('loginController', ['$scope', '$http', 'UserService', function(scope, $http, User) {
+		scope.login = function() {
+		var config = { /* ... */ } // configuration object
 	
-	// Add Contact Controller
-	/*.controller('addCtrl', ['$scope', 'contact', function($scope, contact) { */
-
-    // Start as not visible but when button is tapped it will show as true 
-
-        /*$scope.visible = false;*/
-
-    // Create the array to hold the list of New Contacts
-
-        /*$scope.contacts = [];*/
-
-    // Create the function to push the data into the "contacts" array
-
- /*   $scope.newContact = function(){
-
-        $scope.contacts.push({
-     firstName:$scope.contactfirstName,
-      lastName:$scope.contactlastName,
-         email:$scope.contactemail,
-          date:$scope.contactdate,
-         title:$scope.contacttitle,
-    department:$scope.contactdepartment,
-   managerName:$scope.contactmanagerName,
-       reports:$scope.contactreports,
-   officePhone:$scope.contactofficePhone,
-     cellPhone:$scope.contactcellPhone,
-          city:$scope.contactcity,
-       twitter:$scope.contacttwitterId,
-          blog:$scope.contactblog
-        });
-
-        $scope.contactfirstName = '';
-        $scope.contactlastName = '';
-        $scope.contactemail = '';
-        $scope.contactdate = '';
-        $scope.contactofficePhone = '';
-        $scope.contactcellPhone = '';
-        $scope.contacttitle = '';
-        $scope.contactdepartment = '';
-        $scope.contactmanagerName = '';
-        $scope.contactreports = '';
-        $scope.contactcity = '';
-        $scope.contacttwitterId = '';
-        $scope.contactblog = '';
-
-    };*/
-/*}]);*/
+		$http(config)
+		.success(function(data, status, headers, config) {
+			if (data.status) {
+				// succefull login
+				User.isLogged = true;
+				User.username = data.username;
+			}
+			else {
+				User.isLogged = false;
+				User.username = '';
+			}
+		})
+		.error(function(data, status, headers, config) {
+			User.isLogged = false;
+			User.username = '';
+		});
+	}
+}]);;

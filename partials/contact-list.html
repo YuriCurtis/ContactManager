@@ -7,8 +7,7 @@
     <input ng-model="query" type="search" placeholder="search" class="spec-search-input search-key">
 </div>
 
-<div class="container" style="top: 5px">
-<div style="margin-bottom: 10px;">
+<div class="container" style="top: 5px; margin-bottom: 10px;">
 	<ul class="list-inline">
 		<li ng-repeat="contact in contacts | filter:query | orderBy:orderProp" class="col-xs-3" >
 			<a ng-click="go('/contacts/' + contact.id)" >
@@ -19,87 +18,14 @@
 		</li>
 	</ul>
 </div>
-<!-- Begin Add Contact content -->
-<div ng-controller="contactAddCtrl">
-	<div id="wrap" >
-<div style="display: inline-block; position: relative; top: 12px;">
-	<button class="btn btn-success" ng-click="addUser('new')" >
-	<span class="glyphicon glyphicon-user"></span>  Create New User
+
+<div class="container">
+	<button class="btn btn-success btnPos" >
+		<a class="#/add" >Create A New User <i class="icon-user"></i></a>
 	</button>
 </div>
-
-		<div class="container">
-            <!--<ul ng-repeat="contact in contacts">
-                <li>
-				<span ng-hide="visible" ng-click="visible = true">{{contact.firstName}} {{contact.lastName}} | {{contact.email}}
-				<hr>
-				</span>-->
-
-           <form ng-show="visible" ng-submit="visible = false" ng-submit="newContact()">
-              <!-- BEGIN -->
-			  <h1>Add Contact</h1>
-                  <div class="form-group" >
-              		  <label class="col-sm-1 control-label">A First Name</label>
-              		  <div class="col-sm-12"><input ng-model="contactfirstName" ng-required class="form-control" type="text"></div>
-              		</div>
-              		<div class="form-group" >
-              		  <label class="col-sm-1 control-label">Last Name</label>
-              		  <div class="col-sm-12"><input ng-model="contactlastName" ng-required class="form-control" type="text"></div>
-              		</div>
-              		<div class="form-group" >
-              		  <label class="col-sm-1 control-label">E-mail</label>
-              		  <div class="col-sm-12"><input ng-model="contactemail" placeholder="Email" ng-required class="form-control" type="email"></div>
-              		</div>
-              		<div class="form-group" >
-              		  <label class="col-sm-1 control-label">Start Date</label>
-              		  <div class="col-sm-12"><input ng-model="contactdate" placeholder="Date" ng-required class="form-control" type="date"></div>
-              		</div>
-              		<div class="form-group" >
-              		  <label class="col-sm-8 control-label">Office Number</label>
-              		  <div class="col-sm-12"><input ng-model="contactofficePhone" class="form-control" type="tel"></div>
-              		</div>
-              		<div>
-              		  <label class="col-sm-8 control-label">Cell Phone</label>
-              		  <div class="col-sm-12"><input ng-model="contactcellPhone" class="form-control input-medium" type="tel"></div>
-              		</div>
-              		<div class="form-group" >
-              		  <label class="col-sm-8 control-label">Title</label>
-              		  <div class="col-sm-12"><input ng-model="contacttitle" class="form-control" type="text"></div>
-              		</div>
-              		<div>
-              		  <label class="col-sm-8 control-label">Dept</label>
-              		  <div class="col-sm-12"><input ng-model="contactdepartment" class="form-control" type="text"></div>
-              		</div>
-              		<div>
-              		  <label class="col-sm-1 control-label">Manager</label>
-              		  <div class="col-sm-12"><input ng-model="contactmanagerName" class="form-control" type="text"></div>
-              		</div>
-              		<div class="form-group" >
-              		  <label class="col-sm-2 control-label">City</label>
-              		  <div class="col-sm-12"><input ng-model="contactcity" class="form-control" type="text"></div>
-              		</div>
-              		<div class="form-group">
-              		  <label class="col-sm-2 control-label">Blog</label>
-              		  <div class="col-sm-12" style="margin-bottom: 15px"><input ng-model="contactblog" class="form-control" type="text"></div>
-              		</div>
-              		
-              		<div class="input-group input-group-sm">
-              		  <span class="input-group-addon" id="sizing-addon3">@</span>
-              		  <input ng-model="contacttwitterId" type="text" class="form-control" placeholder="twitter" aria-describedby="sizing-addon3">
-              		</div><!-- end -->
-            <br/>
-
-			<button class="btn btn-success" ng-disabled="error || incomplete" type="submit">
-				<span class="glyphicon glyphicon-save"></span>  Save Changes
-			</button>
-				
-			<button class="btn btn-success" ng-click="go('contacts/add')" style="top:40px;">
-				<span class="glyphicon glyphicon-user"></span>  Add User
-			</button>
-      	</form>
-      </div><!-- END Container -->
-	</div><!-- END Wrap -->
-</div><!-- END Controller -->
-<!-- END Add Contact -->
-
-</div>
+<!--<div class="btnPos">
+	<button class="btn btn-success" ng-click="addContact()" >
+	<i class="glyphicon glyphicon-user-add"></i>  Create A New User</a>
+	</button>
+</div>-->

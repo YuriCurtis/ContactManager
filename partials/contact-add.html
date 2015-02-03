@@ -1,0 +1,55 @@
+<form class="form-inline" ng-show="visible" ng-click="addContact()">
+<!-- BEGIN -->
+	<div class="form-group" >
+	  <label class="col-sm-1 control-label">First Name</label>
+	  <div class="col-sm-12"><input ng-model="contact.firstName" ng-required class="form-control" type="text"></div>
+	</div>
+	<div class="form-group" >
+	  <label class="col-sm-1 control-label">Last Name</label>
+	  <div class="col-sm-12"><input ng-model="contact.lastName" ng-required class="form-control" type="text"></div>
+	</div>
+	<div class="form-group" >
+	  <label class="col-sm-1 control-label">E-mail</label>
+	  <div class="col-sm-12"><input ng-model="contact.email" placeholder="Email" ng-required class="form-control" type="email"></div>
+	</div>
+	<div class="form-group" >
+	  <label class="col-sm-1 control-label">Start Date</label>
+	  <div class="col-sm-12"><input ng-model="contact.date" placeholder="Date" ng-required class="form-control" type="date"></div>
+	</div>
+	<div class="form-group" >
+	  <label class="col-sm-8 control-label">Office Number</label>
+	  <div class="col-sm-12"><input ng-model="contact.officePhone" class="form-control" type="tel"></div>
+	</div>
+	<div>
+	  <label class="col-sm-8 control-label">Cell Phone</label>
+	  <div class="col-sm-12"><input ng-model="contact.cellPhone" class="form-control input-medium" type="tel"></div>
+	</div>
+	<div class="form-group" >
+	  <label class="col-sm-8 control-label">Title</label>
+	  <div class="col-sm-12"><input ng-model="contact.title" class="form-control" type="text"></div>
+	</div>
+	<div>
+	  <label class="col-sm-8 control-label">Dept</label>
+	  <div class="col-sm-12"><input ng-model="contact.department" class="form-control" type="text"></div>
+	</div>
+	<div>
+	  <label class="col-sm-1 control-label">Manager</label>
+	  <div class="col-sm-12"><input ng-model="contact.managerName" class="form-control" type="text"></div>
+	</div>
+	<div class="form-group" >
+	  <label class="col-sm-2 control-label">City</label>
+	  <div class="col-sm-12"><input ng-model="contact.city" class="form-control" type="text"></div>
+	</div>
+	<div class="form-group">
+	  <label class="col-sm-2 control-label">Blog</label>
+	  <div class="col-sm-12" style="margin-bottom: 15px"><input ng-model="contact.blog" class="form-control" type="text"></div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="col-sm-2 control-label">@Twitter</label>
+	  <div class="col-sm-12" style="margin-bottom: 15px"><input ng-model="contact.twitterId"class="form-control" type="text"  placeholder="twitter">
+	</div><!-- end -->
+	</div>
+<br/>
+<button class="btn btn-success" style="margin: 0 50%" type="submit">Save</button>
+</form>
